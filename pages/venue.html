@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Venue Details</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">VenueHub</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="#">Venues</a>
+<a href="#">Login</a>
+</nav>
+
+</header>
+
+
+<section class="venue-container">
+
+<h1>Grand Palace Lawn</h1>
+
+<p class="location">Delhi, India • 500 Guests</p>
+
+
+<!-- IMAGE GALLERY -->
+
+<div class="gallery">
+
+<img src="../images/download.jpg" class="gallery-main" id="mainImage">
+
+<div class="gallery-side">
+<img src="../images/download.jpg" class="thumb">
+<img src="../images/download.jpg" class="thumb">
+<img src="../images/download.jpg" class="thumb">
+<img src="../images/download.jpg" class="thumb">
+</div>
+
+</div>
+<button class="view-all-btn" onclick="openGallery()">View All Photos</button>
+
+<div class="venue-layout">
+
+<!-- LEFT SIDE -->
+
+<div class="venue-details">
+
+<h2>About the Venue</h2>
+
+<p>
+Beautiful lawn venue perfect for weddings, corporate events,
+and exhibitions. Capacity up to 500 guests with full parking
+and catering services available.
+</p>
+
+<h2>Amenities</h2>
+
+<ul class="amenities">
+<li>Parking Available</li>
+<li>Catering Allowed</li>
+<li>Decoration Allowed</li>
+<li>Sound System</li>
+</ul>
+
+</div>
+
+
+<!-- RIGHT SIDE BOOKING -->
+
+<div class="booking-card">
+
+<h3>₹25000 / day</h3>
+
+<label>Select Date</label>
+<input type="date">
+
+<label>Guests</label>
+<input type="number" placeholder="Number of guests">
+
+<button class="book-btn">Book Now</button>
+
+</div>
+
+</div>
+
+
+<!-- REVIEWS SECTION -->
+
+<section class="reviews">
+
+<h2>Guest Reviews</h2>
+
+<div class="review">
+<p class="review-rating">⭐ 5</p>
+<p>
+Amazing venue! The lawn was beautiful and the staff was very helpful.
+Perfect for weddings.
+</p>
+<p class="review-user">– Riya Sharma</p>
+</div>
+
+<div class="review">
+<p class="review-rating">⭐ 4</p>
+<p>
+Great location and good parking space. Food arrangement was excellent.
+</p>
+<p class="review-user">– Aman Verma</p>
+</div>
+
+<div class="review">
+<p class="review-rating">⭐ 5</p>
+<p>
+Had my corporate event here. Everything was organized perfectly.
+</p>
+<p class="review-user">– Neha Kapoor</p>
+</div>
+
+</section>
+
+<section class="add-review">
+
+<h2>Write a Review</h2>
+
+<input type="text" id="reviewName" placeholder="Your Name">
+
+<div class="star-rating" id="starRating">
+
+<span data-value="1">★</span>
+<span data-value="2">★</span>
+<span data-value="3">★</span>
+<span data-value="4">★</span>
+<span data-value="5">★</span>
+
+</div>
+
+<textarea id="reviewText" placeholder="Write your review"></textarea>
+
+<button onclick="addReview()">Submit Review</button>
+
+</section>
+
+
+<footer>
+
+<p>© 2026 VenueHub</p>
+
+</footer>
+
+<script>
+
+let rating = 0;
+let stars = document.querySelectorAll("#starRating span");
+
+/* HOVER EFFECT */
+
+stars.forEach((star, index) => {
+
+star.addEventListener("mouseover", () => {
+
+stars.forEach((s, i) => {
+s.style.color = i <= index ? "gold" : "#ccc";
+});
+
+});
+
+/* REMOVE HOVER WHEN CURSOR LEAVES */
+
+star.addEventListener("mouseout", () => {
+
+stars.forEach((s, i) => {
+s.style.color = i < rating ? "gold" : "#ccc";
+});
+
+});
+
+/* CLICK TO SAVE RATING */
+
+star.addEventListener("click", () => {
+
+rating = index + 1;
+
+stars.forEach((s, i) => {
+s.style.color = i < rating ? "gold" : "#ccc";
+});
+
+});
+
+});
+
+</script>
+
+<script>
+
+let mainImage = document.getElementById("mainImage");
+let thumbnails = document.querySelectorAll(".thumb");
+
+thumbnails.forEach((img)=>{
+
+img.addEventListener("click", function(){
+
+mainImage.src = this.src;
+
+/* remove active from all */
+thumbnails.forEach(t=>t.classList.remove("active"));
+
+/* add active to clicked */
+this.classList.add("active");
+
+});
+
+});
+
+</script>
+
+<script>
+
+let mainImage = document.getElementById("mainImage");
+let thumbnails = document.querySelectorAll(".thumb");
+
+thumbnails.forEach((img)=>{
+
+img.addEventListener("click", function(){
+
+mainImage.src = this.src;
+
+/* highlight selected */
+thumbnails.forEach(t=>t.classList.remove("active"));
+this.classList.add("active");
+
+});
+
+});
+
+/* FULL SCREEN VIEW */
+mainImage.addEventListener("click", function(){
+
+let full = document.createElement("div");
+full.style.position="fixed";
+full.style.top="0";
+full.style.left="0";
+full.style.width="100%";
+full.style.height="100%";
+full.style.background="rgba(0,0,0,0.9)";
+full.style.display="flex";
+full.style.alignItems="center";
+full.style.justifyContent="center";
+full.style.zIndex="1000";
+
+let img=document.createElement("img");
+img.src=this.src;
+img.style.maxWidth="90%";
+img.style.maxHeight="90%";
+
+full.appendChild(img);
+
+full.onclick=function(){
+document.body.removeChild(full);
+}
+
+document.body.appendChild(full);
+
+});
+
+</script>
+
+<div id="galleryModal" class="gallery-modal">
+
+<span class="close-gallery" onclick="closeGallery()">×</span>
+
+<img class="modal-image" id="modalImage">
+
+<div class="modal-thumbs">
+<img src="../images/download.jpg" onclick="changeModal(this)">
+<img src="../images/download.jpg" onclick="changeModal(this)">
+<img src="../images/download.jpg" onclick="changeModal(this)">
+<img src="../images/download.jpg" onclick="changeModal(this)">
+<img src="../images/download.jpg" onclick="changeModal(this)">
+</div>
+
+</div>
+
+<script>
+
+function openGallery(){
+let modal = document.getElementById("galleryModal");
+modal.style.display="flex";
+
+let mainImage = document.getElementById("mainImage").src;
+document.getElementById("modalImage").src = mainImage;
+}
+
+function closeGallery(){
+document.getElementById("galleryModal").style.display="none";
+}
+
+function changeModal(img){
+document.getElementById("modalImage").src = img.src;
+}
+
+</script>
+
+<script type="module" src="../js/firebase.js"></script>
+
+</body>
+
+</html>

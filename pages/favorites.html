@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Favorites</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">VenueHub</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="favorites.html">Favorites</a>
+<a href="add-venue.html">Add Venue</a>
+<a href="login.html">Login</a>
+</nav>
+
+</header>
+
+
+<section class="venues">
+
+<h2>My Favorite Venues ❤️</h2>
+
+<div class="venue-grid" id="favoriteList">
+
+</div>
+
+</section>
+
+
+<footer>
+<p>© 2026 VenueHub</p>
+</footer>
+
+
+<script>
+
+let saved = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+let venues = [
+
+{
+name:"Grand Palace Lawn",
+location:"Delhi",
+image:"../images/download.jpg",
+price:"₹25000 / day"
+},
+
+{
+name:"Mountain View Resort",
+location:"Manali",
+image:"../images/download.jpg",
+price:"₹25000 / day"
+},
+
+{
+name:"Royal Banquet Hall",
+location:"Bangalore",
+image:"../images/download.jpg",
+price:"₹25000 / day"
+},
+
+{
+name:"Garden Paradise",
+location:"Chennai",
+image:"../images/download.jpg",
+price:"₹25000 / day"
+},
+
+{
+name:"City Convention Center",
+location:"Dehradun",
+image:"../images/download.jpg",
+price:"₹25000 / day"
+},
+
+{
+name:"Lake View Lawn",
+location:"Coorg",
+image:"../images/download.jpg",
+price:"₹25000 / day"
+}
+
+];
+
+let container = document.getElementById("favoriteList");
+
+saved.forEach(index => {
+
+let v = venues[index];
+
+let card = `
+<div class="venue-card">
+
+<img src="${v.image}">
+
+<div class="venue-info">
+
+<h3>${v.name}</h3>
+
+<p>${v.location}</p>
+
+<p class="price">${v.price}</p>
+
+</div>
+
+</div>
+`;
+
+container.innerHTML += card;
+
+});
+
+</script>
+
+</body>
+</html>

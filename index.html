@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VenueHub</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+<div class="logo">VenueHub</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="pages/favorites.html">Favorites</a>
+<a href="pages/add-venue.html">Add Venue</a>
+<a href="pages/login.html">Login</a>
+</nav>
+</header>
+
+
+<section class="hero">
+
+<h1>Find the Perfect Venue for Your Event</h1>
+
+<div class="search-box">
+
+<input type="text" id="locationInput" placeholder="Location">
+
+<select id="eventType">
+<option value="">Event Type</option>
+<option>Wedding</option>
+<option>Birthday</option>
+<option>Corporate</option>
+<option>Exhibition</option>
+</select>
+
+<input type="number" id="guestInput" placeholder="Guests">
+
+<button onclick="searchVenues()">Search</button>
+
+</div>
+
+</section>
+
+
+<section class="venues">
+
+<h2>Popular Venues</h2>
+
+<div class="venue-grid">
+
+
+<!-- Venue 1 -->
+<a href="pages/venue.html" class="venue-link">
+<div class="venue-card" data-location="delhi" data-guests="500">
+
+<div class="favorite-btn">♡</div>
+
+<img src="images/download.jpg" alt="Grand Palace Lawn">
+<div class="venue-info">
+
+<h3>Grand Palace Lawn</h3>
+
+<p class="venue-location">Delhi</p>
+
+<p class="rating">
+⭐ 4.8 <span>(120 reviews)</span>
+</p>
+
+<p>Capacity: 500 guests</p>
+
+<p class="price">₹25000 / day</p>
+
+</div>
+</div>
+</a>
+
+
+<!-- Venue 2 -->
+<a href="pages/venue.html" class="venue-link">
+<div class="venue-card" data-location="manali" data-guests="500">
+
+<div class="favorite-btn">♡</div>
+
+<img src="images/The Valley Estate Wedding Venue on the Gold Coast.jpg" alt="Mountain View Resort">
+<div class="venue-info">
+
+<h3>Mountain View Resort</h3>
+
+<p class="venue-location">manali</p>
+
+<p class="rating">
+⭐ 4.8 <span>(120 reviews)</span>
+</p>
+
+<p>Capacity: 1500 guests</p>
+
+<p class="price">₹25000 / day</p>
+
+</div>
+</div>
+</a>
+
+
+<!-- Venue 3 -->
+<a href="pages/venue.html" class="venue-link">
+<div class="venue-card" data-location="Bangalore" data-guests="500">
+
+<div class="favorite-btn">♡</div>
+
+<img src="images/_The District_ Mountainside Event Venue.jpg" alt="Royal Banquet Hall">
+<div class="venue-info">
+
+<h3>Royal Banquet Hall</h3>
+
+<p class="venue-location">Bangalore</p>
+
+<p class="rating">
+⭐ 4.8 <span>(120 reviews)</span>
+</p>
+
+<p>Capacity: 300 guests</p>
+
+<p class="price">₹25000 / day</p>
+
+</div>
+</div>
+</a>
+
+
+<!-- Venue 4 -->
+<a href="pages/venue.html" class="venue-link">
+<div class="venue-card" data-location="Chennai" data-guests="500">
+
+<div class="favorite-btn">♡</div>
+
+<img src="images/download.jpg" alt="Garden Paradise">
+<div class="venue-info">
+
+<h3>Garden Paradise</h3>
+
+<p class="venue-location">Chennai</p>
+
+<p class="rating">
+⭐ 4.8 <span>(120 reviews)</span>
+</p>
+
+<p>Capacity: 500 guests</p>
+
+<p class="price">₹25000 / day</p>
+
+</div>
+</div>
+</a>
+
+
+<!-- Venue 5 -->
+<a href="pages/venue.html" class="venue-link">
+<div class="venue-card" data-location="Dehradun" data-guests="500">
+
+<div class="favorite-btn">♡</div>
+
+<img src="images/The Valley Estate Wedding Venue on the Gold Coast.jpg" alt="city Convention Center">
+<div class="venue-info">
+
+<h3>City Convention Center</h3>
+
+<p class="venue-location">Dehradun</p>
+
+<p class="rating">
+⭐ 4.8 <span>(120 reviews)</span>
+</p>
+
+<p>Capacity: 500 guests</p>
+
+<p class="price">₹25000 / day</p>
+
+</div>
+</div>
+</a>
+
+
+<!-- Venue 6 -->
+<a href="pages/venue.html" class="venue-link">
+<div class="venue-card" data-location="Coorg" data-guests="500">
+
+<div class="favorite-btn">♡</div>
+
+<img src="images/_The District_ Mountainside Event Venue.jpg" alt="Lake View Lawn">
+<div class="venue-info">
+
+<h3>Lake View Lawn</h3>
+
+<p class="venue-location">Coorg</p>
+
+<p class="rating">
+⭐ 4.8 <span>(120 reviews)</span>
+</p>
+
+<p>Capacity: 500 guests</p>
+
+<p class="price">₹25000 / day</p>
+
+</div>
+</div>
+</a>
+
+
+</div>
+
+</section>
+
+
+<footer>
+<p>© 2026 VenueHub</p>
+</footer>
+
+
+
+<script>
+
+function searchVenues(){
+
+let location = document.getElementById("locationInput").value.toLowerCase().trim();
+let guests = document.getElementById("guestInput").value;
+
+let venueLinks = document.querySelectorAll(".venue-link");
+
+venueLinks.forEach(function(link){
+
+let venue = link.querySelector(".venue-card");
+
+let venueLocation = venue.dataset.location;
+let venueGuests = venue.dataset.guests;
+
+let show = true;
+
+if(location && !venueLocation.includes(location)){
+show = false;
+}
+
+if(guests && Number(venueGuests) < Number(guests)){
+show = false;
+}
+
+link.style.display = show ? "" : "none";
+
+});
+
+}
+
+</script>
+
+<script>
+
+let saved = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+document.querySelectorAll(".favorite-btn").forEach((btn, index)=>{
+
+if(saved.includes(index)){
+btn.innerHTML="♥";
+}
+
+btn.addEventListener("click",(e)=>{
+
+e.preventDefault();
+
+if(btn.innerHTML==="♡"){
+btn.innerHTML="♥";
+saved.push(index);
+}
+else{
+btn.innerHTML="♡";
+saved=saved.filter(i=>i!==index);
+}
+
+localStorage.setItem("wishlist", JSON.stringify(saved));
+
+});
+
+});
+
+</script>
+
+<script type="module" src="js/firebase.js"></script>
+
+</body>
+</html>
