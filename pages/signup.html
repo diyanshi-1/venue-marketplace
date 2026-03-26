@@ -1,18 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Sign Up</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
 <section class="login-container">
 
 <h2>Create Account</h2>
 
-<input type="text" placeholder="Full Name">
+<input id="name" type="text" placeholder="Full Name">
 
-<input type="email" placeholder="Email">
+<input id="email" type="email" placeholder="Email">
 
-<input type="password" placeholder="Password">
+<input id="password" type="password" placeholder="Password">
 
-<select>
+<select id="role">
 <option>User</option>
 <option>Venue Owner</option>
 </select>
 
-<button>Create Account</button>
+<button id="signupBtn">Create Account</button>
 
+<p>Already have an account?</p>
+<a href="login.html">Login</a>
 </section>
+
+
+<script type="module">
+
+import { auth } from "../js/firebase.js";
+
+import { createUserWithEmailAndPassword }
+from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+
+const signupBtn = document.getElementById("signupBtn");
+
+signupBtn.addEventListener("click", async (e) => {
+
+e.preventDefault();   // prevents page reload
+
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+
+try {
+
+await createUserWithEmailAndPassword(auth, email, password);
+
+alert("Account created successfully!");
+
+window.location.href="login.html";
+
+}
+
+catch(error){
+
+alert(error.message);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
