@@ -101,6 +101,7 @@ saved.forEach(index => {
 let v = venues[index];
 
 let card = `
+<a href="venue.html" class="venue-link">
 <div class="venue-card">
 
 <img src="${v.image}">
@@ -116,6 +117,7 @@ let card = `
 </div>
 
 </div>
+</a>
 `;
 
 container.innerHTML += card;
