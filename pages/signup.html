@@ -32,28 +32,54 @@
 
 <script type="module">
 
-import { auth } from "../js/firebase.js";
+import { auth, db } from "../js/firebase.js";
 
 import { createUserWithEmailAndPassword }
 from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 
+import { doc, setDoc }
+from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
 
 const signupBtn = document.getElementById("signupBtn");
 
-signupBtn.addEventListener("click", async (e) => {
+signupBtn.addEventListener("click", async () => {
 
-e.preventDefault();   // prevents page reload
-
-let email = document.getElementById("email").value;
-let password = document.getElementById("password").value;
+const name = document.getElementById("name").value;
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+const role = document.getElementById("role").value;
 
 try {
 
-await createUserWithEmailAndPassword(auth, email, password);
+const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+const user = userCredential.user;
+
+/* Save user data in Firestore */
+
+await setDoc(doc(db, "users", user.uid), {
+
+name: name,
+email: email,
+role: role
+
+});
 
 alert("Account created successfully!");
 
-window.location.href="login.html";
+/* Redirect based on role */
+
+if(role === "Venue Owner"){
+
+window.location.href = "add-venue.html";
+
+}
+else{
+
+window.location.href = "../index.html";
+
+}
 
 }
 
