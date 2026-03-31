@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Search Venues</title>
+
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+<h1>Search Venues</h1>
+</div>
+
+<div class="search-container">
+<input type="text" id="searchInput" placeholder="Search by city or event (wedding, birthday, party...)">
+
+<div class="venue-list" id="venueList">
+
+<a href="venue.html" class="venue-card" data-location="delhi" data-service="marriage wedding party">
+<img src="../images/download.jpg">
+<h3>Grand Palace Lawn</h3>
+<p>Delhi</p>
+</a>
+
+<a href="venue.html" class="venue-card" data-location="manali" data-service="private party birthday wedding">
+<img src="../images/The Valley Estate Wedding Venue on the Gold Coast.jpg">
+<h3>Mountain View Resort</h3>
+<p>Manali</p>
+</a>
+
+<a href="venue.html" class="venue-card" data-location="bangalore" data-service="corporate event fair conference">
+<img src="../images/_The District_ Mountainside Event Venue.jpg">
+<h3>Royal Banquet Hall</h3>
+<p>Bangalore</p>
+</a>
+
+<a href="venue.html" class="venue-card" data-location="chennai" data-service="birthday party family event">
+<img src="../images/download.jpg">
+<h3>Garden Paradise</h3>
+<p>Chennai</p>
+</a>
+
+<a href="venue.html" class="venue-card" data-location="dehradun" data-service="marriage wedding reception">
+<img src="../images/The Valley Estate Wedding Venue on the Gold Coast.jpg">
+<h3>City Convention Center</h3>
+<p>Dehradun</p>
+</a>
+
+<a href="venue.html" class="venue-card" data-location="coorg" data-service="private party destination wedding">
+<img src="../images/_The District_ Mountainside Event Venue.jpg">
+<h3>Lake View Lawn</h3>
+<p>Coorg</p>
+</a>
+
+</div>
+<script>
+
+const search = document.getElementById("searchInput");
+
+search.addEventListener("keyup", function(){
+
+let value = search.value.toLowerCase();
+
+let venues = document.querySelectorAll(".venue-card");
+
+venues.forEach(function(v){
+
+let location = v.dataset.location.toLowerCase();
+let service = v.dataset.service.toLowerCase();
+let text = v.innerText.toLowerCase();
+
+if(
+location.includes(value) ||
+service.includes(value) ||
+text.includes(value)
+){
+v.style.display="block";
+}
+else{
+v.style.display="none";
+}
+
+});
+
+});
+
+</script>
+</body>
+</html>
